@@ -22,7 +22,7 @@ namespace BP.Rover
         /// <summary>
         /// Get the prefix for denoting that a map has been explored.
         /// </summary>
-        public  const string ExploredMapPrefix = "explored-";
+        public const string ExploredMapPrefix = "explored-";
 
         #endregion
 
@@ -126,7 +126,7 @@ namespace BP.Rover
 
             Tiles[coloumn, row] = TileType.ExploredLand;
         }
-        
+
         /// <summary>
         /// Serialize the map to a file.
         /// </summary>
@@ -185,7 +185,7 @@ namespace BP.Rover
                 {
                     if (Tiles[j, i] != TileType.ExploredLand)
                         continue;
-                    
+
                     LandingLocation = new Point(j, i);
                     return;
                 }
@@ -208,6 +208,7 @@ namespace BP.Rover
         {
             var random = new Random();
             var tiles = new TileType[width, height];
+            var unexploredLandIndexes = new List<int>();
 
             // randomly set one unexplored tile as the landing location
             for (var i = 0; i < height; i++)
@@ -246,6 +247,11 @@ namespace BP.Rover
                         default:
                             throw new NotImplementedException();
                     }
+
+                    if (tiles[j, i] == TileType.UnexploredLand)
+                    {
+                        unexploredLandIndexes.Add(i * width + j);
+                    }
                 }
             }
 
@@ -258,13 +264,11 @@ namespace BP.Rover
 
                 tiles[x, y] = TileType.UnexploredLand;
             }
-            
-            var unexploredLandIndexes = tiles.Cast<TileType>().Select((t, i) => new { t, i })
-                                                              .Where(x => x.t == TileType.UnexploredLand)
-                                                              .Select(x => x.i).ToArray();
 
-            var landingLocationIndex = random.Next(0, unexploredLandIndexes.Length);
-            var landingLocation = new Point(unexploredLandIndexes[landingLocationIndex] % width, unexploredLandIndexes[landingLocationIndex] / width);
+
+            var landingLocationIndex = random.Next(0, unexploredLandIndexes.Count);
+            var landingLocation = new Point(unexploredLandIndexes[landingLocationIndex] % width, Convert.ToInt32(unexploredLandIndexes[landingLocationIndex] / width));
+            Console.WriteLine(tiles[landingLocation.X, landingLocation.Y]);
 
             tiles[landingLocation.X, landingLocation.Y] = TileType.ExploredLand;
 
