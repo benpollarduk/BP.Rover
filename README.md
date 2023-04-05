@@ -37,7 +37,7 @@ An example map looks like:
 ...................................................................
 ```
 
-Example map files are provided in the **/Example Maps** directory, alternatively maps can be generated from within the UI.
+Example map files are provided in the **/ExampleMaps** directory, alternatively maps can be generated from within the UI.
 
 A rendering option can be selected for viewing the number of times a square is passed through.
 
