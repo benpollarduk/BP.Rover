@@ -256,20 +256,18 @@ namespace BP.Rover
             }
 
             // ensure at least one tile of unexplored land
-            if (tiles.Cast<TileType>().All(x => x != TileType.UnexploredLand))
+            if (!unexploredLandIndexes.Any())
             {
                 // add in some unexplored land at a random location
                 var x = random.Next(0, width);
                 var y = random.Next(0, height);
 
                 tiles[x, y] = TileType.UnexploredLand;
+                unexploredLandIndexes.Add(y * width + x);
             }
-
 
             var landingLocationIndex = random.Next(0, unexploredLandIndexes.Count);
             var landingLocation = new Point(unexploredLandIndexes[landingLocationIndex] % width, Convert.ToInt32(unexploredLandIndexes[landingLocationIndex] / width));
-            Console.WriteLine(tiles[landingLocation.X, landingLocation.Y]);
-
             tiles[landingLocation.X, landingLocation.Y] = TileType.ExploredLand;
 
             return new Map
