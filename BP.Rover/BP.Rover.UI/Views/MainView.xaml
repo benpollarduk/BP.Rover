@@ -7,7 +7,7 @@
         xmlns:converters="clr-namespace:BP.Rover.UI.Converters"
         xmlns:designViewModels="clr-namespace:BP.Rover.UI.DesignViewModels"
         mc:Ignorable="d"
-        Title="Singers in Spaaaaaaace" SizeToContent="Height" MinHeight="650" Height="650" MinWidth="800" Width="800" Background="{StaticResource WindowBackgroundBrush}" WindowStartupLocation="CenterScreen" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type designViewModels:MainDesignViewModel}}">
+        Title="BP Rover" SizeToContent="Height" MinHeight="650" Height="650" MinWidth="800" Width="800" Background="{StaticResource WindowBackgroundBrush}" WindowStartupLocation="CenterScreen" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type designViewModels:MainDesignViewModel}}">
     <Window.Resources>
         <converters:ObjectNotNullToBooleanConverter x:Key="ObjectNotNullToBooleanConverter"/>
         <converters:DoubleRoundingConverter x:Key="DoubleRoundingConverter"/>
