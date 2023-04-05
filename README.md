@@ -20,14 +20,14 @@ Alternatively, maps can be generated from within the UI.
 
 # Prerequisites
  * Windows
-   * Download free IDE Visual Studio 2022 Community ( >> https://visualstudio.microsoft.com/de/vs/community/ ), or use commercial Visual Studio 2022 Version
+   * Download free IDE Visual Studio 2022 Community ( >> https://visualstudio.microsoft.com/de/vs/community/ ), or use commercial Visual Studio 2022 Version.
 
 # Getting Started
  * Clone Repo
  * Run BP.Rover.UI
 
 # Contribute
-It´s Open Source (License >> MIT)...feel free to use or contribute. To raise a pull request visit https://github.com/ben-pollard-uk/rover/pulls
+It´s Open Source (License >> MIT), please feel free to use or contribute. To raise a pull request visit https://github.com/ben-pollard-uk/rover/pulls.
 
 # For Open Questions
 Visit https://github.com/ben-pollard-uk/rover/issues
