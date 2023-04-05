@@ -1,5 +1,5 @@
 # Introduction 
-.NET 4.6.1 implementation of basic map exploration algorithms using a simulated rover.
+.NET 4.6.1 implementation of basic map exploration algorithms using a simulated rover. UI is written in WPF.
 
 ![image](https://user-images.githubusercontent.com/129943363/230073640-0cfef9ff-f140-4bbf-baa5-02077c3b486e.png)
 
