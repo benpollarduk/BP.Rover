@@ -1,0 +1,255 @@
+﻿<Window x:Class="BP.Rover.UI.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:routers="clr-namespace:BP.Rover.Routers;assembly=BP.Rover"
+        xmlns:converters="clr-namespace:BP.Rover.UI.Converters"
+        xmlns:designViewModels="clr-namespace:BP.Rover.UI.DesignViewModels"
+        mc:Ignorable="d"
+        Title="Singers in Spaaaaaaace" SizeToContent="Height" MinHeight="650" Height="650" MinWidth="800" Width="800" Background="{StaticResource WindowBackgroundBrush}" WindowStartupLocation="CenterScreen" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type designViewModels:MainDesignViewModel}}">
+    <Window.Resources>
+        <converters:ObjectNotNullToBooleanConverter x:Key="ObjectNotNullToBooleanConverter"/>
+        <converters:DoubleRoundingConverter x:Key="DoubleRoundingConverter"/>
+        <converters:MapTilesAndRoverPositionToBitmapConverter x:Key="MapTilesAndRoverPositionToBitmapConverter"/>
+        <converters:BooleanInverterConverter x:Key="BooleanInverterConverter"/>
+        <converters:MultipleBooleanAndToSingleBooleanConverter x:Key="MultipleBooleanAndToSingleBooleanConverter"/>
+        <converters:MapTilesAndRoverTrailToHeatMapBitmapConverter x:Key="MapTilesAndRoverTrailToHeatMapBitmapConverter"/>
+        <converters:BooleanToVisibilityCollapsedConverter x:Key="BooleanToVisibilityCollapsedConverter"/>
+        <GridLength x:Key="KeySpacerWidth">20</GridLength>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding x:Name="LoadCommandBinding" Command="{StaticResource LoadCommand}" Executed="LoadCommandBinding_OnExecuted"/>
+        <CommandBinding x:Name="ExploreCommandBinding" Command="{StaticResource ExploreCommand}" Executed="ExploreCommandBinding_OnExecuted"/>
+        <CommandBinding x:Name="ResetCommandBinding" Command="{StaticResource ResetCommand}" Executed="ResetCommandBinding_OnExecuted"/>
+        <CommandBinding x:Name="CancelCommandBinding" Command="{StaticResource CancelCommand}" Executed="CancelCommandBinding_OnExecuted"/>
+        <CommandBinding x:Name="GenerateRandomCommandBinding" Command="{StaticResource GenerateRandomCommand}" Executed="GenerateRandomCommandBinding_OnExecuted"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="L" Modifiers="Control" Command="{StaticResource LoadCommand}"/>
+        <KeyBinding Key="E" Modifiers="Control" Command="{StaticResource ExploreCommand}"/>
+        <KeyBinding Key="R" Modifiers="Control" Command="{StaticResource ResetCommand}"/>
+        <KeyBinding Key="G" Modifiers="Control" Command="{StaticResource GenerateRandomCommand}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Overview" Margin="6" Grid.Row="0">
+            <Grid HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding Path=MapName}" Style="{StaticResource MainTitleLabelStyle}" Grid.Row="0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+                    <Label Content="Width:" Style="{StaticResource SubTitleInfoLabelStyle}"/>
+                    <Label Content="{Binding Path=MapWidth}" Style="{StaticResource InfoLabelStyle}"/>
+                    <Label Content="Height:" Style="{StaticResource SubTitleInfoLabelStyle}"/>
+                    <Label Content="{Binding Path=MapHeight}" Style="{StaticResource InfoLabelStyle}"/>
+                    <Label Content="Percentage land:" Style="{StaticResource SubTitleInfoLabelStyle}"/>
+                    <Label Content="{Binding Path=MapPercentageLand, Mode=OneWay, Converter={StaticResource DoubleRoundingConverter}, ConverterParameter=1}" Style="{StaticResource InfoLabelStyle}"/>
+                    <Label Content="Percentage of land explored:" Style="{StaticResource SubTitleInfoLabelStyle}"/>
+                    <Label Content="{Binding Path=MapPercentageOfLandExplored, Mode=OneWay, Converter={StaticResource DoubleRoundingConverter}, ConverterParameter=1}" Style="{StaticResource InfoLabelStyle}"/>
+                    <Label Content="Moves:" Style="{StaticResource SubTitleInfoLabelStyle}"/>
+                    <Label Content="{Binding Path=MovesUsedToExploreMap, Mode=OneWay}" Style="{StaticResource InfoLabelStyle}"/>
+                </StackPanel>
+                <Grid Visibility="{Binding ElementName=OverviewRenderRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource BooleanToVisibilityCollapsedConverter}}" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Cursor="Cross" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                        <Image.Source>
+                            <MultiBinding Converter="{StaticResource MapTilesAndRoverPositionToBitmapConverter}">
+                                <Binding Path="MapTiles" Mode="OneWay"/>
+                                <Binding Path="RoverPosition" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Image.Source>
+                    </Image>
+                    <Grid HorizontalAlignment="Center" Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="{StaticResource KeySpacerWidth}"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="{StaticResource KeySpacerWidth}"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="{StaticResource KeySpacerWidth}"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="{StaticResource KeySpacerWidth}"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="{StaticResource KeySpacerWidth}"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="Rectangle">
+                                <Setter Property="Width" Value="15"/>
+                                <Setter Property="Height" Value="15"/>
+                                <Setter Property="Stroke" Value="{StaticResource ForegroundBrush}"/>
+                                <Setter Property="StrokeThickness" Value="1"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Rectangle Grid.Column="0">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource MapSeaTileColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Content="Sea" Style="{StaticResource InfoLabelStyle}" Grid.Column="1"/>
+                        <Rectangle Grid.Column="3">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource MapUnexploredLandTileColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Content="Unexplored Land" Style="{StaticResource InfoLabelStyle}" Grid.Column="4"/>
+                        <Rectangle Grid.Column="6">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource MapLandBeingExploredTileColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Content="Land Being Explored" Style="{StaticResource InfoLabelStyle}" Grid.Column="7"/>
+                        <Rectangle Grid.Column="9">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource MapExploredLandTileColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Content="Explored Land" Style="{StaticResource InfoLabelStyle}" Grid.Column="10"/>
+                        <Rectangle Grid.Column="12">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource MapUnknownTileColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Content="Unknown" Style="{StaticResource InfoLabelStyle}" Grid.Column="13"/>
+                        <Rectangle Grid.Column="15">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource RoverColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Content="Rover" Style="{StaticResource InfoLabelStyle}" Grid.Column="16"/>
+                    </Grid>
+                </Grid>
+                <Grid Visibility="{Binding ElementName=HeatMapRenderRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource BooleanToVisibilityCollapsedConverter}}" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" MinWidth="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Cursor="Cross" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Grid.Column="0" Grid.ColumnSpan="3">
+                        <Image.Source>
+                            <MultiBinding Converter="{StaticResource MapTilesAndRoverTrailToHeatMapBitmapConverter}">
+                                <Binding Path="MapTiles" Mode="OneWay"/>
+                                <Binding Path="RoverTrail" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Image.Source>
+                    </Image>
+                    <Label Content="0" Style="{StaticResource InfoLabelStyle}" Grid.Row="1" Grid.Column="0"/>
+                    <Rectangle Height="15" Stroke="{StaticResource ForegroundBrush}" StrokeThickness="1" Grid.Row="1" Grid.Column="1">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0.5" EndPoint="1, 0.5">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop Color="Black" Offset="0"/>
+                                    <GradientStop Color="{StaticResource HeatMapMaxColor}" Offset="1"/>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="{Binding Path=MaximumVisitsToAnyTile, Mode=OneWay}" Style="{StaticResource InfoLabelStyle}" Grid.Row="1" Grid.Column="2"/>
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Render" Margin="6" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Name="OverviewRenderRadioButton" Content="Overview" IsChecked="True" Grid.Column="0"/>
+                <RadioButton Name="HeatMapRenderRadioButton" Content="Heat Map" Grid.Column="1"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Map" Margin="6" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Import" Command="{StaticResource LoadCommand}" IsEnabled="{Binding Path=IsExplorationIsProgress, Mode=OneWay, Converter={StaticResource BooleanInverterConverter}}" Grid.Column="0"/>
+                <Button Content="Reset" Command="{StaticResource ResetCommand}" Grid.Column="1">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource MultipleBooleanAndToSingleBooleanConverter}">
+                            <Binding Path="Map" Mode="OneWay" Converter="{StaticResource ObjectNotNullToBooleanConverter}"/>
+                            <Binding Path="IsExplorationIsProgress" Mode="OneWay" Converter="{StaticResource BooleanInverterConverter}"/>
+                            <Binding Path="IsGeneratedMap" Mode="OneWay" Converter="{StaticResource BooleanInverterConverter}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+                <Button Content="Cancel" Command="{StaticResource CancelCommand}" IsEnabled="{Binding Path=IsExplorationIsProgress, Mode=OneWay}" Grid.Column="2"/>
+                <Button Content="Generate" Command="{StaticResource GenerateRandomCommand}" Grid.Column="3">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource MultipleBooleanAndToSingleBooleanConverter}">
+                            <Binding Path="Map" Mode="OneWay" Converter="{StaticResource ObjectNotNullToBooleanConverter}"/>
+                            <Binding Path="IsExplorationIsProgress" Mode="OneWay" Converter="{StaticResource BooleanInverterConverter}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Explore" Margin="6" Grid.Row="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Recursive" Command="{StaticResource ExploreCommand}" Grid.Column="0">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource MultipleBooleanAndToSingleBooleanConverter}">
+                            <Binding Path="Map" Mode="OneWay" Converter="{StaticResource ObjectNotNullToBooleanConverter}"/>
+                            <Binding Path="IsExplorationIsProgress" Mode="OneWay" Converter="{StaticResource BooleanInverterConverter}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                    <Button.CommandParameter>
+                        <routers:RecursiveFloodFillRouter/>
+                    </Button.CommandParameter>
+                </Button>
+                <Button Content="Iterative" Command="{StaticResource ExploreCommand}" Grid.Column="1">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource MultipleBooleanAndToSingleBooleanConverter}">
+                            <Binding Path="Map" Mode="OneWay" Converter="{StaticResource ObjectNotNullToBooleanConverter}"/>
+                            <Binding Path="IsExplorationIsProgress" Mode="OneWay" Converter="{StaticResource BooleanInverterConverter}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                    <Button.CommandParameter>
+                        <routers:IterativeFloodFillRouter/>
+                    </Button.CommandParameter>
+                </Button>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Options" Margin="6" Grid.Row="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="65"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Exploration Time (ms):" Style="{StaticResource BaseLabelStyle}" Grid.Column="0"/>
+                <TextBox Text="{Binding Path=ExplorationTimeinMs, Mode=TwoWay}" IsEnabled="{Binding Path=IsExplorationIsProgress, Mode=OneWay, Converter={StaticResource BooleanInverterConverter}}" Grid.Column="1" PreviewTextInput="UIElement_OnPreviewTextInput"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
