@@ -1,6 +1,0 @@
-C:\Users\benpollard\Documents\Local Documents\GH\rover\BP.Rover\BP.Rover\bin\Debug\BP.Rover.dll
-C:\Users\benpollard\Documents\Local Documents\GH\rover\BP.Rover\BP.Rover\bin\Debug\BP.Rover.pdb
-C:\Users\benpollard\Documents\Local Documents\GH\rover\BP.Rover\BP.Rover\obj\Debug\BP.Rover.csprojAssemblyReference.cache
-C:\Users\benpollard\Documents\Local Documents\GH\rover\BP.Rover\BP.Rover\obj\Debug\BP.Rover.csproj.CoreCompileInputs.cache
-C:\Users\benpollard\Documents\Local Documents\GH\rover\BP.Rover\BP.Rover\obj\Debug\BP.Rover.dll
-C:\Users\benpollard\Documents\Local Documents\GH\rover\BP.Rover\BP.Rover\obj\Debug\BP.Rover.pdb
