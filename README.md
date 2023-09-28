@@ -52,8 +52,5 @@ A rendering option can be selected for viewing the number of times a square is p
  * Build all projects
  * Run the BP.Rover.UI project
 
-# Contribute
-It´s Open Source (License >> MIT), please feel free to use or contribute. To raise a pull request visit https://github.com/ben-pollard-uk/rover/pulls.
-
 # For Open Questions
 Visit https://github.com/ben-pollard-uk/rover/issues
