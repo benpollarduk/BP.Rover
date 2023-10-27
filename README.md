@@ -53,4 +53,4 @@ A rendering option can be selected for viewing the number of times a square is p
  * Run the BP.Rover.UI project
 
 # For Open Questions
-Visit https://github.com/ben-pollard-uk/rover/issues
+Visit https://github.com/benpollarduk/rover/issues
