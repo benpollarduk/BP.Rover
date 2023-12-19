@@ -51,9 +51,9 @@ A rendering option can be selected for viewing the number of times a square is p
    * Download free IDE Visual Studio 2022 Community ( >> https://visualstudio.microsoft.com/de/vs/community/ ), or use commercial Visual Studio 2022 Version.
 
 # Getting Started
- * Clone the repo
- * Build all projects
- * Run the BP.Rover.UI project
+ * Clone the repo.
+ * Build all projects.
+ * Run the BP.Rover.UI project.
 
 # For Open Questions
 Visit https://github.com/benpollarduk/rover/issues
