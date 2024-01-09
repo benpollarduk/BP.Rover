@@ -1,9 +1,14 @@
+<div align="center">
+
+# Rover
+.NET 4.6.1 implementation of map exploration algorithms using a simulated rover. A UI is provided, written in WPF.
+
 [![GitHub release](https://img.shields.io/github/release/benpollarduk/rover.svg)](https://github.com/benpollarduk/rover/releases)
 [![License](https://img.shields.io/github/license/benpollarduk/rover.svg)](https://opensource.org/licenses/MIT)
 
-# Introduction 
-.NET 4.6.1 implementation of map exploration algorithms using a simulated rover. A UI is provided, written in WPF.
+</div>
 
+## Introduction
 ![image](https://user-images.githubusercontent.com/129943363/230073640-0cfef9ff-f140-4bbf-baa5-02077c3b486e.png)
 
 The rules for exploration are:
@@ -46,14 +51,14 @@ A rendering option can be selected for viewing the number of times a square is p
 
 ![image](https://user-images.githubusercontent.com/129943363/230103111-c780974a-4486-49e6-b28d-08b5e8788993.png)
 
-# Prerequisites
+## Prerequisites
  * Windows
    * Download free IDE Visual Studio 2022 Community ( >> https://visualstudio.microsoft.com/de/vs/community/ ), or use commercial Visual Studio 2022 Version.
 
-# Getting Started
+## Getting Started
  * Clone the repo.
  * Build all projects.
  * Run the BP.Rover.UI project.
 
-# For Open Questions
+## For Open Questions
 Visit https://github.com/benpollarduk/rover/issues
