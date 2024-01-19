@@ -1,6 +1,6 @@
 <div align="center">
 
-# Rover
+# BP.Rover
 .NET 4.6.1 implementation of map exploration algorithms using a simulated rover. A UI is provided, written in WPF.
 
 [![GitHub release](https://img.shields.io/github/release/benpollarduk/rover.svg)](https://github.com/benpollarduk/rover/releases)
